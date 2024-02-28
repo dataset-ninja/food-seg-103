@@ -32,7 +32,7 @@ The subsequent phase involves annotating segmentation masks, which entails delin
 * **Annotation:** The authors enlisted the assistance of a data annotation company to undertake the meticulous task of mask annotation. Each image was meticulously examined by a human annotator, who initially identified the ingredient categories present, assigned the appropriate category label to each ingredient, and delineated the pixel-wise mask accordingly. Annotators were instructed to disregard minuscule image regions, even if they contained some ingredients, if their area covered less than 5% of the entire image.
 * **Refinement:** Upon receiving all the masks from the annotation company, the authors proceeded with an extensive refinement process. This involved adhering to three primary refinement criteria: 1) rectifying any mislabeled data; 2) eliminating unpopular category labels assigned to fewer than 5 images; and 3) consolidating visually similar ingredient categories, such as merging "orange" and "citrus." Following refinement, the initial set of 125 ingredient categories was streamlined to 103. The annotation and refinement endeavors spanned approximately one year.
 
-<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/6a343da5-68a3-4ed4-af4c-849127730878" alt="image" width="800">
+<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/6a343da5-68a3-4ed4-af4c-849127730878" alt="image" width="600">
 
 <span style="font-size: smaller; font-style: italic;">Examples of dataset refinement. (a) sources images (b) before refinement (wrong or confusing labels exist), and \(c\) after refinement.</span>
 
