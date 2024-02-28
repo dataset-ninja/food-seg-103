@@ -1,11 +1,11 @@
 If you make use of the FoodSeg103 data, please cite the following reference:
 
 ``` bibtex 
-@dataset{FoodSeg103,
-  author={Xiongwei Wu and Xin Fu and Ying Liu and Ee-Peng Lim and Steven C.H. Hoi and Qianru Sun},
-  title={FoodSeg103 Dataset},
-  year={2021},
-  url={https://xiongweiwu.github.io/foodseg103.html}
+@inproceedings{wu2021foodseg,
+	title={A Large-Scale Benchmark for Food Image Segmentation},
+	author={Wu, Xiongwei and Fu, Xin and Liu, Ying and Lim, Ee-Peng and Hoi, Steven CH and Sun, Qianru},
+	booktitle={Proceedings of ACM international conference on Multimedia},
+	year={2021}
 }
 ```
 
