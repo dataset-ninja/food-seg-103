@@ -100,16 +100,16 @@ def convert_and_upload_supervisely_project(
         pixels = np.unique(mask_np)
         for pixel in pixels[1:]:
             obj_class = pixel_to_class[pixel]
+            super_meta = class_to_super.get(obj_class.name)
+            super_tag = sly.Tag(super_meta)
             mask = mask_np == pixel
             curr_bitmap = sly.Bitmap(mask)
-            curr_label = sly.Label(curr_bitmap, obj_class)
+            curr_label = sly.Label(curr_bitmap, obj_class, tags=[super_tag])
             labels.append(curr_label)
 
         return sly.Annotation(img_size=(img_height, img_wight), labels=labels)
 
     project = api.project.create(workspace_id, project_name, change_name_if_conflict=True)
-
-    meta = sly.ProjectMeta()
 
     pixel_to_class = {}
     with open(classes_path) as f:
@@ -119,10 +119,151 @@ def convert_and_upload_supervisely_project(
                 pixel, class_name = row.split("\t")
                 if pixel == "0":
                     continue
-                obj_class = sly.ObjClass(class_name.lstrip(), sly.Bitmap)
+                obj_class = sly.ObjClass(class_name.lstrip().lower(), sly.Bitmap)
                 pixel_to_class[int(pixel)] = obj_class
 
-    meta = meta.add_obj_classes(list(pixel_to_class.values()))
+    vegetable_meta = sly.TagMeta("vegetable", sly.TagValueType.NONE)
+    fruit_meta = sly.TagMeta("fruit", sly.TagValueType.NONE)
+    main_meta = sly.TagMeta("main", sly.TagValueType.NONE)
+    dessert_meta = sly.TagMeta("dessert", sly.TagValueType.NONE)
+    nut_meta = sly.TagMeta("nut", sly.TagValueType.NONE)
+    meat_meta = sly.TagMeta("meat", sly.TagValueType.NONE)
+    beverage_meta = sly.TagMeta("beverage", sly.TagValueType.NONE)
+    fungus_meta = sly.TagMeta("fungus", sly.TagValueType.NONE)
+    seafood_meta = sly.TagMeta("seafood", sly.TagValueType.NONE)
+    egg_meta = sly.TagMeta("egg", sly.TagValueType.NONE)
+    sauce_meta = sly.TagMeta("sauce", sly.TagValueType.NONE)
+    soup_meta = sly.TagMeta("soup", sly.TagValueType.NONE)
+    tofu_meta = sly.TagMeta("tofu", sly.TagValueType.NONE)
+    salad_meta = sly.TagMeta("salad", sly.TagValueType.NONE)
+    other_meta = sly.TagMeta("other ingredients", sly.TagValueType.NONE)
+
+    meta = sly.ProjectMeta(
+        obj_classes=list(pixel_to_class.values()),
+        tag_metas=[
+            vegetable_meta,
+            fruit_meta,
+            main_meta,
+            dessert_meta,
+            nut_meta,
+            meat_meta,
+            beverage_meta,
+            fungus_meta,
+            seafood_meta,
+            egg_meta,
+            sauce_meta,
+            soup_meta,
+            tofu_meta,
+            salad_meta,
+            other_meta,
+        ],
+    )
+
+    class_to_super = {
+        "candy": dessert_meta,
+        "egg tart": dessert_meta,
+        "french fries": dessert_meta,
+        "chocolate": dessert_meta,
+        "biscuit": dessert_meta,
+        "popcorn": dessert_meta,
+        "pudding": dessert_meta,
+        "ice cream": dessert_meta,
+        "cheese butter": dessert_meta,
+        "cake": dessert_meta,
+        "wine": beverage_meta,
+        "milkshake": beverage_meta,
+        "coffee": beverage_meta,
+        "juice": beverage_meta,
+        "milk": beverage_meta,
+        "tea": beverage_meta,
+        "almond": nut_meta,
+        "red beans": nut_meta,
+        "cashew": nut_meta,
+        "dried cranberries": nut_meta,
+        "soy": nut_meta,
+        "walnut": nut_meta,
+        "peanut": nut_meta,
+        "egg": egg_meta,
+        "apple": fruit_meta,
+        "date": fruit_meta,
+        "apricot": fruit_meta,
+        "avocado": fruit_meta,
+        "banana": fruit_meta,
+        "strawberry": fruit_meta,
+        "cherry": fruit_meta,
+        "blueberry": fruit_meta,
+        "raspberry": fruit_meta,
+        "mango": fruit_meta,
+        "olives": fruit_meta,
+        "peach": fruit_meta,
+        "lemon": fruit_meta,
+        "pear": fruit_meta,
+        "fig": fruit_meta,
+        "pineapple": fruit_meta,
+        "grape": fruit_meta,
+        "kiwi": fruit_meta,
+        "melon": fruit_meta,
+        "orange": fruit_meta,
+        "watermelon": fruit_meta,
+        "steak": meat_meta,
+        "pork": meat_meta,
+        "chicken duck": meat_meta,
+        "sausage": meat_meta,
+        "fried meat": meat_meta,
+        "lamb": meat_meta,
+        "sauce": sauce_meta,
+        "crab": seafood_meta,
+        "fish": seafood_meta,
+        "shellfish": seafood_meta,
+        "shrimp": seafood_meta,
+        "soup": soup_meta,
+        "bread": main_meta,
+        "corn": main_meta,
+        "hamburg": main_meta,
+        "pizza": main_meta,
+        " hanamaki baozi": main_meta,
+        "wonton dumplings": main_meta,
+        "pasta": main_meta,
+        "noodles": main_meta,
+        "rice": main_meta,
+        "pie": main_meta,
+        "tofu": tofu_meta,
+        "eggplant": vegetable_meta,
+        "potato": vegetable_meta,
+        "garlic": vegetable_meta,
+        "cauliflower": vegetable_meta,
+        "tomato": vegetable_meta,
+        "kelp": vegetable_meta,
+        "seaweed": vegetable_meta,
+        "spring onion": vegetable_meta,
+        "rape": vegetable_meta,
+        "ginger": vegetable_meta,
+        "okra": vegetable_meta,
+        "lettuce": vegetable_meta,
+        "pumpkin": vegetable_meta,
+        "cucumber": vegetable_meta,
+        "white radish": vegetable_meta,
+        "carrot": vegetable_meta,
+        "asparagus": vegetable_meta,
+        "bamboo shoots": vegetable_meta,
+        "broccoli": vegetable_meta,
+        "celery stick": vegetable_meta,
+        "cilantro mint": vegetable_meta,
+        "snow peas": vegetable_meta,
+        "cabbage": vegetable_meta,
+        "bean sprouts": vegetable_meta,
+        "onion": vegetable_meta,
+        "pepper": vegetable_meta,
+        "green beans": vegetable_meta,
+        "french beans": vegetable_meta,
+        "king oyster mushroom": fungus_meta,
+        "shiitake": fungus_meta,
+        "enoki mushroom": fungus_meta,
+        "oyster mushroom": fungus_meta,
+        "white button mushroom": fungus_meta,
+        "salad": salad_meta,
+        "other ingredients": other_meta,
+    }
 
     api.project.update_meta(project.id, meta.to_json())
 
