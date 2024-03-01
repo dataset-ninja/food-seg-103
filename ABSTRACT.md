@@ -40,7 +40,7 @@ The subsequent phase involves annotating segmentation masks, which entails delin
 
 <span style="font-size: smaller; font-style: italic;">Examples of dataset refinement. (a) sources images (b) before refinement (wrong or confusing labels exist), and \(c\) after refinement.</span>
 
-<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/a2a7220b-4af4-4937-ad8f-cd64b582c8c2" alt="image" width="800">
+<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/a2a7220b-4af4-4937-ad8f-cd64b582c8c2" alt="image" width="1000">
 
 
 
