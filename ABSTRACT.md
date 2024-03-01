@@ -28,7 +28,7 @@ The authors utilized FoodSeg103 as a case study to elucidate the process of cons
 * **Categories:** Initially, the authors surveyed the frequency of all ingredient categories within Recipe1M. Despite the dataset containing around 1.5k ingredient categories, many proved challenging to mask out from images effectively. Consequently, the authors streamlined the categories to retain only the top 124 (later refined to 103) ingredients. Any ingredients not falling under these categories were assigned to the *other ingredients* category.
 * **Image Selection:** Within each fine-grained ingredient category, the authors sampled images from Recipe1M based on two criteria: 1) Each image should feature at least two ingredients, either of the same or different categories, with a maximum of 16 ingredients per image; and 2) The ingredients must be clearly visible and easily annotatable within the images. Following this selection process, the authors obtained 7,118 images for annotation with segmentation masks.
 
-<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/26dc5fe9-c8de-49c8-b3a9-f9ba24260be7" alt="image" width="600">
+<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/26dc5fe9-c8de-49c8-b3a9-f9ba24260be7" alt="image" width="1000">
 
 <span style="font-size: smaller; font-style: italic;">More annotation examples of FoodSeg103. The source images are in the left hand, while the annotation masks are in the right hand.</span>
 
@@ -40,7 +40,7 @@ The subsequent phase involves annotating segmentation masks, which entails delin
 
 <span style="font-size: smaller; font-style: italic;">Examples of dataset refinement. (a) sources images (b) before refinement (wrong or confusing labels exist), and \(c\) after refinement.</span>
 
-<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/a2a7220b-4af4-4937-ad8f-cd64b582c8c2" alt="image" width="600">
+<img src="https://github.com/dataset-ninja/food-seg-103/assets/120389559/a2a7220b-4af4-4937-ad8f-cd64b582c8c2" alt="image" width="800">
 
 
 
