@@ -13,7 +13,7 @@ from dataset_tools.templates import (
 ##################################
 # * Before uploading to instance #
 ##################################
-PROJECT_NAME: str = "FoodSeg103"
+PROJECT_NAME: str = "FoodSeg103_test"
 PROJECT_NAME_FULL: str = "FoodSeg103 Dataset"
 HIDE_DATASET = True  # set False when 100% sure about repo quality
 
@@ -89,7 +89,25 @@ ORGANIZATION_URL: Optional[Union[str, List[str]]] = [
 ]
 
 # Set '__PRETEXT__' or '__POSTTEXT__' as a key with string value to add custom text. e.g. SLYTAGSPLIT = {'__POSTTEXT__':'some text}
-SLYTAGSPLIT: Optional[Dict[str, Union[List[str], str]]] = None
+SLYTAGSPLIT: Optional[Dict[str, Union[List[str], str]]] = {
+    "supercategories": [
+        "vegetable",
+        "fruit",
+        "main",
+        "dessert",
+        "nut",
+        "meat",
+        "beverage",
+        "fungus",
+        "seafood",
+        "egg",
+        "sauce",
+        "soup",
+        "tofu",
+        "salad",
+        "other ingredients",
+    ]
+}
 TAGS: Optional[List[str]] = None
 
 

@@ -5,6 +5,7 @@ from urllib.parse import unquote, urlparse
 import numpy as np
 import supervisely as sly
 from dataset_tools.convert import unpack_if_archive
+from supervisely.imaging.color import get_predefined_colors
 from supervisely.io.fs import get_file_name, get_file_size
 from tqdm import tqdm
 
@@ -99,7 +100,7 @@ def convert_and_upload_supervisely_project(
         mask_np = sly.imaging.image.read(mask_path)[:, :, 0]
         pixels = np.unique(mask_np)
         for pixel in pixels[1:]:
-            obj_class = pixel_to_class[pixel]
+            obj_class = meta.get_obj_class(pixel_to_class[pixel])
             super_meta = class_to_super.get(obj_class.name)
             super_tag = sly.Tag(super_meta)
             mask = mask_np == pixel
@@ -119,8 +120,14 @@ def convert_and_upload_supervisely_project(
                 pixel, class_name = row.split("\t")
                 if pixel == "0":
                     continue
-                obj_class = sly.ObjClass(class_name.lstrip().lower(), sly.Bitmap)
-                pixel_to_class[int(pixel)] = obj_class
+                # obj_class = sly.ObjClass(
+                #     class_name.lstrip().lower(), sly.Bitmap)
+                pixel_to_class[int(pixel)] = class_name.lstrip().lower()
+
+    obj_classes = [
+        sly.ObjClass(name, sly.Bitmap, color)
+        for name, color in zip(list(pixel_to_class.values()), get_predefined_colors(103))
+    ]
 
     vegetable_meta = sly.TagMeta("vegetable", sly.TagValueType.NONE)
     fruit_meta = sly.TagMeta("fruit", sly.TagValueType.NONE)
@@ -139,7 +146,7 @@ def convert_and_upload_supervisely_project(
     other_meta = sly.TagMeta("other ingredients", sly.TagValueType.NONE)
 
     meta = sly.ProjectMeta(
-        obj_classes=list(pixel_to_class.values()),
+        obj_classes=obj_classes,
         tag_metas=[
             vegetable_meta,
             fruit_meta,
@@ -221,7 +228,7 @@ def convert_and_upload_supervisely_project(
         "corn": main_meta,
         "hamburg": main_meta,
         "pizza": main_meta,
-        " hanamaki baozi": main_meta,
+        "hanamaki baozi": main_meta,
         "wonton dumplings": main_meta,
         "pasta": main_meta,
         "noodles": main_meta,
