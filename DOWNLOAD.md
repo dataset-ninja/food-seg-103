@@ -1,6 +1,6 @@
 Dataset **FoodSeg103** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](Set 'HIDE_DATASET=False' to generate download link)
+ [Download](https://assets.supervisely.com/supervisely-supervisely-assets-public/teams_storage/M/9/hT/o2J96XRb4w17q841xlrC2Ugk5DLBWnnhtTgarxwITNBgWy7MClzUeilcS8yDRlSpa8D1BuzTgLj9PFfGfB3gE6y2YExJh9JLQTFyJdpMjl4t5GlXbrWyx6pX64gY.tar)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
